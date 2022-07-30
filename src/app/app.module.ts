@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { DenemeComponent } from './deneme/deneme.component';
+import { InspectionApiService } from "./inspection-api.service";
 
 
 @NgModule({
@@ -15,9 +16,9 @@ import { DenemeComponent } from './deneme/deneme.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [InspectionApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

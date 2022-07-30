@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InspectionApiService {
+
+  
+
   readonly inspectionAPIUrl = "https://62c5797d134fa108c253480f.mockapi.io/fakeData";
 
   constructor(private http: HttpClient) { }  
@@ -13,15 +16,15 @@ export class InspectionApiService {
   getInspectionList(): Observable<any[]> { 
     return this.http.get<any>(this.inspectionAPIUrl);
   };
-  addInspection(dataAdd:any) {
-    return this.http.post(this.inspectionAPIUrl, dataAdd);
+  addInspection(dataAdd:any): Observable<any[]> {
+    return this.http.post<any>(this.inspectionAPIUrl, dataAdd);
   }
-  updateInspection(id: number | string, editedNewData:any) {
-    return this.http.put(this.inspectionAPIUrl + `/${id}`, editedNewData);
+  updateInspection(id: number | string, editedNewData:any): Observable<any[]>{
+    return this.http.put<any>(this.inspectionAPIUrl + `/${id}`, editedNewData);
   }
 
-  deleteInspection(id:number | string) {
-    return this.http.delete(this.inspectionAPIUrl + `/${id}`)
+  deleteInspection(id:number | string): Observable<any[]> {
+    return this.http.delete<any>(this.inspectionAPIUrl + `/${id}`)
   }
 
 }
