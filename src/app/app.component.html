@@ -1,52 +1,76 @@
-<div class="container">
+<div *ngIf="!isUpdate" class="container">
   <form #myForm="ngForm" (ngSubmit)="addUser(myForm.value)">
     <div class="form-group">
       <label class="form-label">Full Name</label>
-      <input type="text" class="form-control" name="name" [(ngModel)] = "name"  >
+      <input type="text" class="form-control" name="name" [(ngModel)]="name">
     </div>
     <div class="form-group">
       <label class="form-label">Mobile Number</label>
-      <input type="text" class="form-control" name="mobile" [(ngModel)] = "mobile" >
+      <input type="text" class="form-control" name="mobile" [(ngModel)]="mobile">
     </div>
     <div class="form-group">
       <label class="form-label">Email address</label>
-      <input type="email" class="form-control" name="email" ngModel>
+      <input type="email" class="form-control" name="email" [(ngModel)]='email'>
     </div>
     <div class="form-group">
       <label class="form-label">Password</label>
-      <input type="password" class="form-control" name="password" ngModel>
+      <input type="password" class="form-control" name="password" [(ngModel)]="password">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary m-3 ">Submit</button>
     <!--(click)="addUser(myForm.value)-->
   </form>
+</div>
+
+<div *ngIf="isUpdate" class="container">
+  <form #myForm="ngForm" (ngSubmit)="editUser(userId, myForm.value)">
+    <div class="form-group">
+      <label class="form-label">Full Name</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="name">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Mobile Number</label>
+      <input type="text" class="form-control" name="mobile" [(ngModel)]="mobile">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email address</label>
+      <input type="email" class="form-control" name="email" [(ngModel)]='email'>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" name="password" [(ngModel)]="password">
+    </div>
+    <button type="submit" class="btn btn-primary m-3 ">Update</button>
+    <!--(click)="addUser(myForm.value)-->
+  </form>
+</div>
 
 
-  <table class="table table-striped">
-    <thead>
-      <th>Name</th>
-      <th>Mobile</th>
-      <!-- <th>Email</th> -->
-      <!-- <th>Password</th> -->
-      <th>Edit</th>
-      <th>Delete</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of data" >
-        <!-- <td>{{ item.id }}</td>
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Mobile</th>
+    <!-- <th>Email</th> -->
+    <!-- <th>Password</th> -->
+    <th>Edit</th>
+    <th>Delete</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data">
+      <!-- <td>{{ item.id }}</td>
         <td>{{ item.task }}</td>
         <td>{{ item.date }}</td> -->
-        <td>{{ item.name }}</td>
-        <td>{{ item.mobile }}</td>
-        <!-- <td>{{ item.email }}</td> -->
-        <td><button type="button" class="btn btn-danger" (click)="deleteUser(item.id)">
+      <td>{{ item.name }}</td>
+      <td>{{ item.mobile }}</td>
+      <!-- <td>{{ item.email }}</td> -->
+      <td><button type="button" class="btn btn-danger" (click)="deleteUser(item.id)">
           DELETE
         </button></td>
-        <td><button class="btn btn-info" (click)="updateUser(item.id, {name: item.name, mobile: item.mobile})" >UPDATE</button></td>
-      </tr>
-    </tbody>
-  </table>
-  <br><br><br>
+      <td><button class="btn btn-info"
+          (click)="updateUser(item.id, {name: item.name, mobile: item.mobile, email: item.email, password: item.password})">UPDATE</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br><br><br>
 
-  <app-deneme></app-deneme>
-
-</div>
+<!-- <app-deneme></app-deneme> -->

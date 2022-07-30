@@ -9,74 +9,88 @@ import { InspectionApiService } from './inspection-api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-aspnetwebapi';
 
   inspectionList$!: Observable<any[]>;
   data: any;
   dataAdd: any;
-  formObj:any;
-  userId:any;
-  dataEdit:any;
-  name:string = '';
+  userId: any;
+  dataEdit: any;
+  name: string = '';
   mobile: number | string = 0;
+  email: string = '';
+  password: string | number = '';
+  isUpdate: boolean = false;
+  formObj: any;
+  editedNewData:any;
+  itemId:number|string = 0;
 
-  constructor(private service: InspectionApiService) {
 
-    
+  constructor(
+    private service: InspectionApiService,
+  ) {
+
+
+
     this.service.getInspectionList().subscribe(response => {
       this.data = response;
       console.log(this.data);
-  
-  
+      // console.log(this.isUpdate);
+    });
+  }
+
+
+
+  addUser(formObj: any) {
+    // console.log(formObj);
+    this.service.addInspection(formObj).subscribe(response => {
+      this.formObj = response;
+      // console.log(this.formObj);
+      this.isUpdate = false;
+
     });
 
 
   }
-    addUser(formObj: NgForm) {
-      // console.log(formObj);
-      this.service.addInspection(formObj).subscribe(response => {
-        this.formObj = response;
-        console.log(this.formObj);
 
-      });
+  editUser(userId:any, editedNewData:any) {
+    
+    this.service.updateInspection(userId, editedNewData).subscribe(response => {
+      this.editedNewData = response;
 
-
-    }
-
-
-    deleteUser(userId: any) {
-      // console.log(userId);
-      this.service.deleteInspection(userId).subscribe(response => {
-        this.userId = response;
-        console.log(this.userId);
-        
-      });
-      
-
-    }
-
-    updateUser(userId:any, dataEdit:any) {
-      console.log(userId);
-      console.log(dataEdit);
-      this.name = dataEdit;
-      this.mobile = dataEdit;
-      // this.service.updateInspection(userId, dataEdit).subscribe(response => {
-      //   this.dataEdit = response;
-        
-      // });
-
-      
+    });
+      console.log(this.isUpdate);
+  }
 
 
-    }
 
-  
+  deleteUser(userId: any) {
+    // console.log(userId);
+    this.service.deleteInspection(userId).subscribe(response => {
+      this.userId = response;
+      // console.log(this.userId);
+
+    });
+
+
+  }
+
+  updateUser(userId: any, dataEdit: any) {
+    // console.log(userId);
+    // console.log(dataEdit);
+    this.userId = userId;
+    this.name = dataEdit.name;
+    this.mobile = dataEdit.mobile;
+    this.email = dataEdit.email;
+    this.password = dataEdit.password;
+    this.isUpdate = true;
+    // console.log(userId);
 
 
 
 
 
-  // this.inspectionList$ = this.service.getInspectionList();
+
+  }
 
 
 
