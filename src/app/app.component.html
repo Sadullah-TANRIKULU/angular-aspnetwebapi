@@ -44,15 +44,14 @@
   </form>
 </div>
 
-
-<table *ngIf="data?.length > 0" class="table table-striped">
+<table *ngIf="data?.length > 0; else noData" class="table table-striped">
   <thead>
     <th>Name</th>
     <th>Mobile</th>
     <th>Email</th>
     <!-- <th>Password</th> -->
-    <th>Edit</th>
     <th>Delete</th>
+    <th>Edit</th>
   </thead>
   <tbody>
     <tr *ngFor="let item of data; let i = index">
@@ -71,6 +70,9 @@
     </tr>
   </tbody>
 </table>
+<ng-template #noData >
+  <p class="p-3 mb-2 bg-warning text-dark fs-1"> Hey, you delete the whole data in the table! Now what do you expect to see here! Come on! Insert a new data, please 😀! </p>
+</ng-template>
 <br><br><br>
 
 <!-- <app-deneme></app-deneme> -->
